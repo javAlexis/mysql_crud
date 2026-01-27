@@ -24,7 +24,9 @@ WORKDIR /var/www/html/
 COPY . /var/www/html/
 
 # Install PHP dependencies (Composer is in app/)
+# Install PHP dependencies (Composer is in app/)
 WORKDIR /var/www/html/app
+RUN composer config --no-plugins allow-plugins.composer/installers true
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 # Set Apache DocumentRoot using the custom config file
