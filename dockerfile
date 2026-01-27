@@ -1,11 +1,15 @@
-FROM php:7.4-apache
+FROM php:7.1-apache
+
+# Fix legacy Debian Stretch repositories (Archive)
+RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
+ && sed -i 's/security.debian.org/archive.debian.org/g' /etc/apt/sources.list \
+ && sed -i '/stretch-updates/d' /etc/apt/sources.list
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --force-yes \
     unzip \
     git \
     libzip-dev \
-    libonig-dev \
     libxml2-dev
 
 # Enable Apache require module and mod_rewrite
