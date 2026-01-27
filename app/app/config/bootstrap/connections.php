@@ -41,13 +41,23 @@ use lithium\data\Connections;
 /**
  * Uncomment this configuration to use MongoDB as your default database.
  */
+$dbHost = getenv('DB_HOST') ?: 'localhost';
+$dbUser = getenv('DB_USER') ?: 'root';
+$dbPass = getenv('DB_PASS') ?: '12345678';
+$dbName = getenv('DB_NAME') ?: 'php_mysql_crud_db';
+$dbPort = getenv('DB_PORT') ?: '3306';
+
+if (!$dbHost || !$dbUser || !$dbName) {
+	error_log("Database configuration is incomplete. Please check environment variables.");
+}
+
 Connections::add('default', [
 	'type' => 'database',
 	'adapter' => 'MySql',
-    'host' => 'php-mysql-crud-db',
-	'login' => 'admin',
-	'password' => 'outrasenhaqualquer',
-	'database' => 'php-mysql-crud-db',
+	'host' => $dbHost . ':' . $dbPort, // Support custom port
+	'login' => $dbUser,
+	'password' => $dbPass,
+	'database' => $dbName,
 	'encoding' => 'UTF-8'
 ]);
 
