@@ -1,18 +1,38 @@
 FROM php:8.1-apache
 
-# Install extensions
+# Install system dependencies
+RUN apt-get update && apt-get install -y unzip git
+
+# Enable Apache require module and mod_rewrite
+RUN a2enmod rewrite
+
+# Install PHP extensions
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Copy the application code
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Set working directory to default web root
+WORKDIR /var/www/html/
+
+# Copy ALL files to preserve structure
 COPY . /var/www/html/
+
+# Install PHP dependencies (Composer is in app/)
+WORKDIR /var/www/html/app
+RUN composer install --no-dev --optimize-autoloader
+
+# Set Apache DocumentRoot using the custom config file
+COPY docker/apache_render.conf /etc/apache2/sites-available/000-default.conf
+
+# Enable mod_rewrite (often needed for frameworks)
+RUN a2enmod rewrite
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html
 
-# Expose the port (Render sets default PORT to 10000, usually)
-# We can't use $PORT in EXPOSE instruction, but it's good practice to document
+# Expose port 80
 EXPOSE 80
 
-# Configure Apache to listen on dynamic PORT env var
-# We use a shell command to substitute the port in Apache config at runtime
+# Start Apache with dynamic port handling
 CMD sh -c "sed -i 's/80/${PORT:-80}/g' /etc/apache2/ports.conf && sed -i 's/:80>/:${PORT:-80}>/g' /etc/apache2/sites-available/000-default.conf && docker-php-entrypoint apache2-foreground"
