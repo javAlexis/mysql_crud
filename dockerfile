@@ -1,13 +1,18 @@
 FROM php:7.4-apache
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y unzip git
+RUN apt-get update && apt-get install -y \
+    unzip \
+    git \
+    libzip-dev \
+    libonig-dev \
+    libxml2-dev
 
 # Enable Apache require module and mod_rewrite
 RUN a2enmod rewrite
 
 # Install PHP extensions
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql zip mbstring xml
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -20,7 +25,7 @@ COPY . /var/www/html/
 
 # Install PHP dependencies (Composer is in app/)
 WORKDIR /var/www/html/app
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 # Set Apache DocumentRoot using the custom config file
 COPY docker/apache_render.conf /etc/apache2/sites-available/000-default.conf
