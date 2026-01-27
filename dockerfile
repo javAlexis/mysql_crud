@@ -29,6 +29,14 @@ WORKDIR /var/www/html/app
 RUN composer config --no-plugins allow-plugins.composer/installers true
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
+# MANUALLY FIX LITHIUM PATH:
+# If composer installed it to libraries/unionofrad/lithium, move it to libraries/lithium
+RUN if [ -d "libraries/unionofrad/lithium" ]; then \
+      echo "Moving Lithium from vendor path to library path..."; \
+      if [ -d "libraries/lithium" ]; then rm -rf libraries/lithium; fi; \
+      mv libraries/unionofrad/lithium libraries/lithium; \
+    fi
+
 # Set Apache DocumentRoot using the custom config file
 COPY docker/apache_render.conf /etc/apache2/sites-available/000-default.conf
 
