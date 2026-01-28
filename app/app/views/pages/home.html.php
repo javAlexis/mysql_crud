@@ -34,7 +34,7 @@ $this->title('Inicio');
 				Carros CHANGAN NUEVOS con garantía de fábrica y financiamiento.
 			</div>
 
-			<a href="#" class="btn-action">Ver Catálogo</a>
+			<a href="/products" class="btn-action">Ver Catálogo</a>
 
 			<img src="https://png.pngtree.com/png-vector/20230906/ourmid/pngtree-white-car-png-image_10017354.png"
 				alt="Carro Nuevo" class="car-image">
