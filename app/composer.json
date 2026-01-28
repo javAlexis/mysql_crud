@@ -10,7 +10,10 @@
         {"name": "The Community"}
     ],
     "config": {
-        "vendor-dir": "libraries"
+        "vendor-dir": "libraries",
+        "allow-plugins": {
+            "composer/installers": true
+        }
     },
     "prefer-stable": true,
     "require": {

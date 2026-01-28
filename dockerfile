@@ -30,7 +30,6 @@ COPY . /var/www/html/
 # Install PHP dependencies (Composer is in app/)
 # Install PHP dependencies (Composer is in app/)
 WORKDIR /var/www/html/app
-RUN composer config --no-plugins allow-plugins.composer/installers true
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 # MANUALLY FIX LITHIUM PATH:
@@ -47,7 +46,14 @@ COPY docker/apache_render.conf /etc/apache2/sites-available/000-default.conf
 # Enable mod_rewrite (often needed for frameworks)
 RUN a2enmod rewrite
 
-# Set permissions
+# Ensure Lithium resources/tmp directories exist and are writable
+# (Fixes white screen / permission errors)
+RUN mkdir -p /var/www/html/app/app/resources/tmp/cache/templates \
+    && mkdir -p /var/www/html/app/app/resources/tmp/logs \
+    && mkdir -p /var/www/html/app/app/resources/tmp/tests \
+    && chmod -R 777 /var/www/html/app/app/resources
+
+# Set permissions for the whole webroot again to be safe
 RUN chown -R www-data:www-data /var/www/html
 
 # Expose port 80
