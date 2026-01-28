@@ -1,0 +1,119 @@
+/* Landing Page Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.hero-section {
+    padding: 40px 0;
+}
+
+.card-custom {
+    border-radius: 12px;
+    padding: 30px;
+    color: white;
+    min-height: 300px;
+    position: relative;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.card-yellow {
+    background-color: #ffc107; /* Yellow */
+    color: #333;
+}
+
+.card-purple {
+    background-color: #2c007d; /* Purple */
+    color: white;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 14px;
+    margin-bottom: 20px;
+    max-width: 60%;
+}
+
+.search-box {
+    background: white;
+    padding: 5px;
+    border-radius: 8px;
+    display: flex;
+    margin-top: 20px;
+}
+
+.search-input {
+    border: none;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+}
+
+.btn-search {
+    background-color: #2c007d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.btn-action {
+    background-color: white;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.car-image {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 200px; /* Adjust based on actual image */
+    height: auto;
+}
+
+.brands-section {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.brands-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.brand-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.brand-item {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    width: 120px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-logo {
+    max-width: 100%;
+    max-height: 100%;
+}
