@@ -12,15 +12,17 @@
 
 <head>
 	<?php echo $this->html->charset(); ?>
-	<title>Application &gt; <?php echo $this->title(); ?></title>
-	<?php echo $this->html->style(['bootstrap.min', 'lithified', 'landing']); ?>
+	<title>TecnoMegaStore &gt; <?php echo $this->title(); ?></title>
+	<!-- FontAwesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<?php echo $this->html->style(['bootstrap.min', 'lithified', 'tecnostore']); ?>
 	<?php echo $this->scripts(); ?>
 	<?php echo $this->styles(); ?>
 	<?php echo $this->html->link('Icon', null, ['type' => 'icon']); ?>
 </head>
 
 <body class="lithified">
-	<div class="container container-main">
+	<div class="container-main">
 		<?php echo $this->content(); ?>
 	</div>
 </body>
