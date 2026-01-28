@@ -13,6 +13,8 @@
  *
  * @see lithium\action\Dispatcher
  */
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 /**
  * If you're sharing a single Lithium core install or other libraries among multiple
