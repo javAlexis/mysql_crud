@@ -18,8 +18,8 @@ RUN a2enmod rewrite
 # Install PHP extensions
 RUN docker-php-ext-install mysqli pdo pdo_mysql zip mbstring xml
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Install Composer (Composer 2.2 is the last version supporting PHP 7.1)
+COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
 # Set working directory to default web root
 WORKDIR /var/www/html/
